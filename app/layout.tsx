@@ -22,12 +22,12 @@ export default async function RootLayout({
           {!session ?
             <Login />
             :
-            <div className='flex'>
+            <div className='flex flex-col md:flex-row'>
+
               {/* SIDEBAR */}
-              <div className='bg-[#202123] max-w-xs h-screen overflow-y-auto md:min-w-[20rem]'>
+              <div className={`z-20`}>
                 <Sidebar />
               </div>
-
               {/* CLIENT PROVIDER */}
               <ClientProvider />
 
