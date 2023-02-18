@@ -8,6 +8,8 @@ import { collection, orderBy, query } from 'firebase/firestore';
 import { db } from '../utils/firebase';
 import ChatRow from './ChatRow';
 import ModelSelection from './ModelSelection';
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import LogoutModal from './LogoutModal';
 
 type Props = {};
 
@@ -51,14 +53,21 @@ const Sidebar: React.FC<Props> = ({ }) => {
                 </div>
 
                 {session &&
-                    <img
-                        onClick={() => signOut()}
-                        src={session.user?.image!}
-                        alt='user-avatar'
-                        className='h-12 w-12 rounded-full cursor-pointer mx-auto mb-2 hover:opacity-50'
-                    />
+                    <label htmlFor='logout-modal' className='flex justify-between items-center hover:bg-gray-700/70 cursor-pointer text-gray-300 transition-all duration-200 ease-out rounded-lg px-2' >
+                        <div className='flex items-center space-x-3'>
+                            <img
+                                src={session.user?.image!}
+                                alt='user-avatar'
+                                className='h-12 w-12 rounded-full cursor-pointer mx-auto mb-2 hover:opacity-50'
+                            />
+                            <p className='truncate'>{session.user?.name}</p>
+                        </div>
+                        <ArrowLeftOnRectangleIcon className='h-7 w-7' />
+                    </label>
                 }
             </div>
+
+            <LogoutModal modalId='logout-modal' onContinue={() => signOut()} />
         </>
     );
 }

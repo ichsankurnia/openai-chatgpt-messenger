@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.15",
+    "daisyui": "^2.50.1",
     "firebase": "^9.17.1",
     "firebase-admin": "^11.5.0",
     "next": "latest",
