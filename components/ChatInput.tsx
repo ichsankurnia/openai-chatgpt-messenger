@@ -19,6 +19,8 @@ const ChatInput: React.FC<Props> = ({ chatId }) => {
 
     // TODO: useSWR to get model
     // const model = 'text-davinci-003'
+    // text-moderation-playground
+    // text-davinci-002-render-sha
     const { data: model } = useSWR('selectedModel', {
         fallbackData: 'text-davinci-003'
     })

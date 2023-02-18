@@ -23,6 +23,8 @@ export default async function handler(
             return res.status(400).json({ message: 'Please provide a valid chat ID' })
         }
 
+        console.log(req.body)
+
         // ChatGPT Query
         const response = await query(text, chatId, model)
 
