@@ -39,8 +39,8 @@ const Chat: React.FC<Props> = ({ chatId }) => {
         <div className='flex-1 overflow-y-auto overflow-x-hidden'>
             {data?.empty &&
                 <>
-                    <p className='mt-10 text-center text-white'>Type a prompt in below to get started</p>
-                    <ArrowDownCircleIcon className='h-10 w-10 mx-auto mt-5 text-white animate-bounce' />
+                    <p className='mt-10 text-center text-gray-800 dark:text-white'>Type a prompt in below to get started</p>
+                    <ArrowDownCircleIcon className='h-10 w-10 mx-auto mt-5 text-gray-800 dark:text-white animate-bounce' />
                 </>
             }
             {data?.docs.map((item) =>

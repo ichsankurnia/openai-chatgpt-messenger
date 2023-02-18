@@ -1,15 +1,16 @@
 'use client'
 
 import { signOut, useSession } from 'next-auth/react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import NewChat from './NewChat';
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { collection, orderBy, query } from 'firebase/firestore';
 import { db } from '../utils/firebase';
 import ChatRow from './ChatRow';
 import ModelSelection from './ModelSelection';
-import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftOnRectangleIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import LogoutModal from './LogoutModal';
+import { ThemeContext } from '../providers/ThemeProvider';
 
 type Props = {};
 
@@ -17,6 +18,7 @@ const Sidebar: React.FC<Props> = ({ }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     const { data: session } = useSession()
+    const { theme, setTheme } = useContext(ThemeContext)
     const trigger = useRef<any>(null);
     const sidebar = useRef<any>(null);
 
@@ -86,7 +88,7 @@ const Sidebar: React.FC<Props> = ({ }) => {
             {/* SIDEBAR */}
             <div id="sidebar" ref={sidebar}
                 className={`bg-[#202123] absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto h-screen overflow-y-auto 
-                    w-[17rem] sm:w-[20rem] ${sidebarOpen ? 'translate-x-0' : '-translate-x-[20rem]'} md:translate-x-0 
+                    w-[17rem] xl:w-[19rem] 2xl::w-[20rem] ${sidebarOpen ? 'translate-x-0' : '-translate-x-[20rem]'} md:translate-x-0 
                     transform transition-all ease-in-out duration-500
                 `}>
                 <div className='p-2 flex flex-col h-screen'>
@@ -115,19 +117,33 @@ const Sidebar: React.FC<Props> = ({ }) => {
                         </div>
                     </div>
 
-                    {session &&
-                        <label htmlFor='logout-modal' className='flex justify-between items-center hover:bg-gray-700/70 cursor-pointer text-gray-300 transition-all duration-200 ease-out rounded-lg px-2' >
-                            <div className='flex items-center space-x-3'>
-                                <img
-                                    src={session.user?.image!}
-                                    alt='user-avatar'
-                                    className='h-12 w-12 rounded-full cursor-pointer mx-auto mb-2 hover:opacity-50'
-                                />
-                                <p className='truncate'>{session.user?.name}</p>
+                    <div className='space-y-2.5'>
+                        {theme === 'dark' ?
+                            <div className='chatRow' onClick={() => setTheme('light')}>
+                                <SunIcon className='h-5 w-5' />
+                                <p className='flex-1'>Light Mode</p>
                             </div>
-                            <ArrowLeftOnRectangleIcon className='h-7 w-7' />
-                        </label>
-                    }
+                            :
+                            <div className='chatRow' onClick={() => setTheme('dark')}>
+                                <MoonIcon className='h-5 w-5' />
+                                <p className='flex-1'>Dark Mode</p>
+                            </div>
+                        }
+
+                        {session &&
+                            <label htmlFor='logout-modal' className='flex justify-between items-center hover:bg-gray-700/70 cursor-pointer text-gray-300 transition-all duration-200 ease-out rounded-lg px-2' >
+                                <div className='flex items-center space-x-3'>
+                                    <img
+                                        src={session.user?.image!}
+                                        alt='user-avatar'
+                                        className='h-10 2xl:h-12 w-10 2xl:w-12 rounded-full cursor-pointer mx-auto mb-2 hover:opacity-50 mt-2'
+                                    />
+                                    <p className='truncate'>{session.user?.name}</p>
+                                </div>
+                                <ArrowLeftOnRectangleIcon className='h-7 w-7' />
+                            </label>
+                        }
+                    </div>
                 </div>
             </div>
 

@@ -1,10 +1,11 @@
 import { getServerSession } from 'next-auth'
-import ClientProvider from '../components/ClientProvider'
+import SessionProvider from '../providers/SessionProvider'
+import ClientProvider from '../providers/ClientProvider'
 import Login from '../components/Login'
-import SessionProvider from '../components/SessionProvider'
 import Sidebar from '../components/Sidebar'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import './../styles/globals.css'
+import ThemeProvider from '../providers/ThemeProvider'
 
 export default async function RootLayout({
   children,
@@ -22,19 +23,21 @@ export default async function RootLayout({
           {!session ?
             <Login />
             :
-            <div className='flex flex-col md:flex-row'>
+            <ThemeProvider>
+              <div className='flex flex-col md:flex-row'>
 
-              {/* SIDEBAR */}
-              <div className={`z-20`}>
-                <Sidebar />
-              </div>
-              {/* CLIENT PROVIDER */}
-              <ClientProvider />
+                {/* SIDEBAR */}
+                <div className={`z-20`}>
+                  <Sidebar />
+                </div>
+                {/* CLIENT PROVIDER */}
+                <ClientProvider />
 
-              <div className='bg-[#343541] flex-1'>
-                {children}
+                <div className='bg-white dark:bg-[#343541] flex-1 duration-300'>
+                  {children}
+                </div>
               </div>
-            </div>
+            </ThemeProvider>
           }
         </SessionProvider>
       </body>

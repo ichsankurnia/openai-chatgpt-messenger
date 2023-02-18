@@ -38,7 +38,8 @@ const ChatRow: React.FC<Props> = ({ id, onClickChat }) => {
 
     const removeChat = async () => {
         await deleteDoc(doc(db, 'users', session?.user?.email!, 'chats', id))
-        onClickChat('')
+        // @ts-ignored
+        onClickChat()
         router.replace('/')
     }
 
