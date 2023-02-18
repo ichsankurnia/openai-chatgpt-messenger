@@ -5,7 +5,14 @@ import Login from '../components/Login'
 import Sidebar from '../components/Sidebar'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import './../styles/globals.css'
-import ThemeProvider from '../providers/ThemeProvider'
+// import ThemeProvider from '../providers/ThemeProvider'
+import dynamic from 'next/dynamic';
+
+
+// Fixes: Hydration failed because the initial UI does not match what was rendered on the server.
+const DynamicContextProvider = dynamic(() => import('../providers/ThemeProvider').then(mod => mod.default), {
+  ssr: false
+});
 
 export default async function RootLayout({
   children,
@@ -23,7 +30,7 @@ export default async function RootLayout({
           {!session ?
             <Login />
             :
-            <ThemeProvider>
+            <DynamicContextProvider>
               <div className='flex flex-col md:flex-row'>
 
                 {/* SIDEBAR */}
@@ -37,7 +44,7 @@ export default async function RootLayout({
                   {children}
                 </div>
               </div>
-            </ThemeProvider>
+            </DynamicContextProvider>
           }
         </SessionProvider>
       </body>

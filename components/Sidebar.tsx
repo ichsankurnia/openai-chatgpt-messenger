@@ -55,10 +55,10 @@ const Sidebar: React.FC<Props> = ({ }) => {
         <>
             {/* SIDEBAR MOBILE */}
             <div className={`fixed inset-0 bg-slate-900 bg-opacity-60 z-40 lg:hidden md:z-auto transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} aria-hidden="true" onClick={() => setSidebarOpen(false)}></div>
-            <div className='lg:hidden sticky top-0 w-full px-4 sm:px-6 lg:px-8 z-30 bg-[#343541]'>
+            <div className='lg:hidden sticky top-0 w-full px-4 sm:px-6 lg:px-8 z-30 bg-[#f7f7f8] dark:bg-[#343541] dark:text-white'>
                 <div className="flex items-center justify-between pt-4 pb-4">
                     <button onClick={() => setSidebarOpen(!sidebarOpen)}
-                        className='inline-flex items-center justify-center p-1 rounded-md text-gray-300 hover:bg-slate-700 hover:text-white outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900'
+                        className='inline-flex items-center justify-center p-1 rounded-md text-gray-300 hover:bg-gray-800 hover:text-white outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900'
                     >
                         {sidebarOpen ?
                             <svg className="block h-6 w-6 bg-transparent text-darkText1 opa-anim" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" >
