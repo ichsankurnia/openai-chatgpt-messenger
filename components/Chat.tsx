@@ -35,6 +35,8 @@ const Chat: React.FC<Props> = ({ chatId }) => {
         // console.log("Scroll to bot")
     }, [data?.docs.length]);
 
+    // console.log(data?.docs[data?.docs?.length - 1]?.data()?.text)
+
     return (
         <div className='flex-1 overflow-y-auto overflow-x-hidden'>
             {data?.empty &&

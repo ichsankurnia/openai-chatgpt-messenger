@@ -29,6 +29,11 @@ const ChatInput: React.FC<Props> = ({ chatId }) => {
         e.preventDefault()
         if (!prompt) return
 
+
+        // TOAST NOTIFICATION
+        const notification = toast.loading('ChatGPT is thinking...')
+
+
         const input = prompt.trim()
         setPrompt('')
 
@@ -43,14 +48,13 @@ const ChatInput: React.FC<Props> = ({ chatId }) => {
             }
         }
 
+        // ADD ROW MESSAGE TO FIREBASE
         await addDoc(
             collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'),
             message
         )
 
-        // TOAST NOTIFICATION
-        const notification = toast.loading('ChatGPT is thinking...')
-
+        // ASK QUESTION TO OPENAI
         await fetch('/api/ask-question', {
             method: 'POST',
             headers: {
