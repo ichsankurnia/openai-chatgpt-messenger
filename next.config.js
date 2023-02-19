@@ -2,7 +2,8 @@
 module.exports = {
   reactStrictMode: false,
   experimental: {
-    appDir: true
+    appDir: true,
+    runtime: 'edge'
   },
   images: {
     domains: ['links.papareact.com']
