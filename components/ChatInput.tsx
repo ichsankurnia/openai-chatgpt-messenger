@@ -80,7 +80,7 @@ const ChatInput: React.FC<Props> = ({ chatId }) => {
     }
 
     return (
-        <div className='bg-white text-gray-800 dark:bg-gray-700/50 dark:text-gray-400 rounded-lg text-sm'>
+        <div className='bg-white text-gray-800 dark:bg-gray-700/50 dark:text-gray-400 rounded-lg text-sm border-t-2 border-gray-300 dark:border-transparent dark:border-none'>
             <form onSubmit={sendMessage} className='p-5 space-x-5 flex'>
                 <input className='bg-transparent focus:outline-none flex-1 disabled:cursor-not-allowed disabled:text-gray-300'
                     disabled={!session}
